@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="src/index.css" />
+    <title>Weather App</title>
+    <script src="https://unpkg.com/axios@1.1.2/dist/axios.min.js"></script>
+  </head>
+  <body>
+    <div class="app">
+      <header>
+        <form action="" id="search-form">
+          <input
+            type="search"
+            id="search-bar"
+            class="search-bar"
+            placeholder="Enter a city"
+            required
+          />
+          <input type="submit" class="search-button" value="Search" />
+        </form>
+      </header>
+      <main>
+        <div class="result">
+          <div>
+            <h1>
+              <!--Current city -->
+              -
+            </h1>
+            <p>
+              <span id="time"> <!--Current time--> </span>, moderate rain
+              <br />
+              Humidity: <strong>87%</strong> Wind: <strong>7.2 km/h</strong>
+            </p>
+          </div>
+          <div class="row">
+            <div class="temperature-container">
+              <div class="weather-emoji">🌧️</div>
+              <div class="temperature" id="currentTemperature">
+                <!--Current Temperature-->
+                -
+              </div>
+              <div class="unit">°C</div>
+            </div>
+          </div>
+        </div>
+        <!-- <div class="forecast">
+        <ul>
+          <li>Sun ⛅ <br /><strong>14°C</strong> - 18°C</li>
+          <li>Mon ⛅ <br /><strong>14°C</strong> - 18°C</li>
+          <li>Tue ⛅ <br /><strong>14°C</strong> - 18°C</li>
+          <li>Wed ⛅ <br /><strong>14°C</strong> - 18°C</li>
+          <li>Thu ⛅ <br /><strong>14°C</strong> - 18°C</li>
+        </ul>
+       </div> -->
+      </main>
+      <footer>
+        <p>
+          This project was coded by
+          <a href="#" target="_blank">Lisa Samoilyk</a> and is open-sourced on
+          <a href="#" target="_blank">GitHub</a> and hosted on
+          <a href="#" target="_blank"> Netlify</a>
+        </p>
+      </footer>
+    </div>
+    <script src="scripts/index.js"></script>
+  </body>
+</html>
