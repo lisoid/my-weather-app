@@ -2,10 +2,13 @@ document.addEventListener("DOMContentLoaded", (event) => {
   //show weather for default city
   getApi("KYIV");
 
+  setInterval(() => {
+    let date = new Date();
+    document.querySelector("#time").innerHTML = displayTime(date);
+  }, 1000);
+
   // Show current day and time
   function displayTime(date) {
-    //let date = new Date();
-
     let days = [
       "Sunday",
       "Monday",
@@ -39,11 +42,6 @@ document.addEventListener("DOMContentLoaded", (event) => {
         src="${response.data.condition.icon_url}"
         alt=""
       />`;
-
-    setInterval(() => {
-      let date = new Date(response.data.time * 1000);
-      document.querySelector("#time").innerHTML = displayTime(date);
-    }, 1000); // update every second
   }
 
   // Search for a city
