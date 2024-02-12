@@ -20,7 +20,6 @@ document.addEventListener("DOMContentLoaded", (event) => {
     let minutes = String(date.getMinutes()).padStart(2, "0");
     return `${day} ${hour}:${minutes}`;
   }
-  //setInterval(displayTime, 1000); // update every second
 
   // Show weather for a city
   function showWeather(response) {
@@ -41,10 +40,10 @@ document.addEventListener("DOMContentLoaded", (event) => {
         alt=""
       />`;
 
-    console.log(response.data);
-
-    let date = new Date(response.data.time * 1000);
-    document.querySelector("#time").innerHTML = displayTime(date);
+    setInterval(() => {
+      let date = new Date(response.data.time * 1000);
+      document.querySelector("#time").innerHTML = displayTime(date);
+    }, 1000); // update every second
   }
 
   // Search for a city
