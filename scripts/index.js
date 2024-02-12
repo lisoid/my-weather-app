@@ -36,6 +36,11 @@ document.addEventListener("DOMContentLoaded", (event) => {
     document.querySelector("#wind").innerHTML =
       response.data.wind.speed + "km/h";
 
+    document.querySelector("#weather-icon").innerHTML = `<img
+        src="${response.data.condition.icon_url}"
+        alt=""
+      />`;
+
     console.log(response.data);
 
     let date = new Date(response.data.time * 1000);

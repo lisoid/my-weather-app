@@ -1,11 +1,12 @@
 body {
   font-family: "Montserrat", sans-serif;
-  background: #f3e7c1;
+  background: #f2f2f2;
   color: #072f5f;
 }
+
 .app {
   margin: 60px auto;
-  background: #f2f2f2;
+  background: #fffee0;
   border-radius: 15px;
   box-shadow: 0 30px 50px #dfa28d;
   max-width: 700px;
@@ -22,7 +23,7 @@ input {
   font-size: larger;
 }
 input.search-bar {
-  border: none;
+  border: #ba6e52 solid 1px;
   padding-left: 10px;
   color: #072f5f;
   position: relative;
@@ -38,7 +39,7 @@ input.search-bar:focus-visible {
   font-family: "Montserrat", sans-serif;
 }
 .search-button {
-  background: #f3e7c1;
+  background: #e8a58b;
   color: #072f5f;
   border: none;
   padding: 0 50px;
@@ -69,9 +70,9 @@ h1 {
 .result p {
   font-size: 24px;
 }
-.weather-emoji {
-  font-size: 60px;
-  margin: 25px 10px;
+.weather-icon {
+  width: 88px;
+  margin: 10px 10px;
 }
 
 .temperature {
