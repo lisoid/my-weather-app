@@ -26,10 +26,17 @@ document.addEventListener("DOMContentLoaded", (event) => {
 
   // Show weather for a city
   function showWeather(response) {
-    document.querySelector("h1").innerHTML = response.data.city.toUpperCase();
-    let currentTemperature = Math.round(response.data.temperature.current);
-    document.querySelector("#currentTemperature").innerHTML =
-      currentTemperature;
+    document.querySelector("#current-city").innerHTML =
+      response.data.city.toUpperCase();
+    document.querySelector("#current-temperature").innerHTML = Math.round(
+      response.data.temperature.current
+    );
+    document.querySelector("#description").innerHTML =
+      response.data.condition.description;
+    document.querySelector("#humidity").innerHTML =
+      response.data.temperature.humidity + "%";
+    document.querySelector("#wind").innerHTML =
+      response.data.wind.speed + "km/h";
   }
 
   // Search for a city
