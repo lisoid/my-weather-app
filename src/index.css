@@ -1,12 +1,13 @@
 body {
   font-family: "Montserrat", sans-serif;
-  background: #f2f2f2;
+  background: url("../images/background.jpg") no-repeat center center fixed;
+  background-size: cover;
   color: #072f5f;
 }
 
 .app {
   margin: 60px auto;
-  background: #fffee0;
+  background: #fef8f8;
   border-radius: 15px;
   box-shadow: 0 30px 50px #dfa28d;
   max-width: 700px;
@@ -23,7 +24,7 @@ input {
   font-size: larger;
 }
 input.search-bar {
-  border: #ba6e52 solid 1px;
+  border: #ffeae9 solid 1px;
   padding-left: 10px;
   color: #072f5f;
   position: relative;
@@ -31,7 +32,7 @@ input.search-bar {
   margin-right: 10px;
 }
 input.search-bar:focus-visible {
-  outline: #dfa28d solid 1px;
+  outline: #f9ddd9 solid 1px;
 }
 ::placeholder {
   color: #072f5f;
@@ -39,7 +40,7 @@ input.search-bar:focus-visible {
   font-family: "Montserrat", sans-serif;
 }
 .search-button {
-  background: #e8a58b;
+  background: #f9ddd9;
   color: #072f5f;
   border: none;
   padding: 0 50px;
@@ -47,7 +48,7 @@ input.search-bar:focus-visible {
 }
 .search-button:hover {
   cursor: pointer;
-  background: #efad95;
+  background: #ffeae9;
   transition: all 200ms ease-out;
 }
 div.result {

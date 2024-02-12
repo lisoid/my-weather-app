@@ -1,0 +1,16 @@
+FONT Montserrat
+font-family: "Montserrat", sans-serif;
+
+font color:
+(navy blue) #072F5F
+(mauve) #ba6e52
+
+background (light) #fef8f8;
+
+button (darker) #f9ddd9 #ffeae9
+
+color (white) #F2F2F2
+dark #000000
+
+
+
