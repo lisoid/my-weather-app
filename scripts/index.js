@@ -3,8 +3,8 @@ document.addEventListener("DOMContentLoaded", (event) => {
   getApi("KYIV");
 
   // Show current day and time
-  function displayTime() {
-    let date = new Date();
+  function displayTime(date) {
+    //let date = new Date();
 
     let days = [
       "Sunday",
@@ -18,11 +18,9 @@ document.addEventListener("DOMContentLoaded", (event) => {
     let day = days[date.getDay()];
     let hour = String(date.getHours()).padStart(2, "0");
     let minutes = String(date.getMinutes()).padStart(2, "0");
-
-    let currentTime = document.querySelector("#time");
-    currentTime.innerHTML = `${day} ${hour}:${minutes}`;
+    return `${day} ${hour}:${minutes}`;
   }
-  setInterval(displayTime, 1000); // update every second
+  //setInterval(displayTime, 1000); // update every second
 
   // Show weather for a city
   function showWeather(response) {
@@ -37,6 +35,11 @@ document.addEventListener("DOMContentLoaded", (event) => {
       response.data.temperature.humidity + "%";
     document.querySelector("#wind").innerHTML =
       response.data.wind.speed + "km/h";
+
+    console.log(response.data);
+
+    let date = new Date(response.data.time * 1000);
+    document.querySelector("#time").innerHTML = displayTime(date);
   }
 
   // Search for a city
