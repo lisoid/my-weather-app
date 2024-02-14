@@ -2,6 +2,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
   //show weather for default city
   getApi("KYIV");
 
+  //updates time every second
   setInterval(() => {
     let date = new Date();
     document.querySelector("#time").innerHTML = displayTime(date);
@@ -42,6 +43,46 @@ document.addEventListener("DOMContentLoaded", (event) => {
         src="${response.data.condition.icon_url}"
         alt=""
       />`;
+
+    getForecastAPI(response.data.city);
+  }
+
+  //format days (short version) for weather forecast
+  function formatDay(timestamp) {
+    let date = new Date(timestamp * 1000);
+    let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+
+    return days[date.getDay()];
+  }
+
+  //Show weather forecast
+  function showForecast(response) {
+    let forecastHTML = "";
+
+    response.data.daily.slice(1, 6).forEach(function (day) {
+      forecastHTML =
+        forecastHTML +
+        `
+<div class="weather-forecast-day">
+  <div class="weather-forecast-date">${formatDay(day.time)}</div>
+  <div class="weather-forecast-icon">
+    <img
+      src="${day.condition.icon_url}"
+      alt=""
+    />
+  </div>
+  <div class="weather-forecast-temperatures">
+    <span class="weather-forecast-temp-max"'>${Math.round(
+      day.temperature.maximum
+    )}°</span>
+    <span class="weather-forecast-temp-min">${Math.round(
+      day.temperature.minimum
+    )}°</span>
+  </div>
+</div>`;
+    });
+    let forecastElement = document.querySelector("#forecast");
+    forecastElement.innerHTML = forecastHTML;
   }
 
   // Search for a city
@@ -55,6 +96,11 @@ document.addEventListener("DOMContentLoaded", (event) => {
       getApi(city);
     }
     cityInput.value = "";
+  }
+
+  // Sanitize city input
+  function sanitizeCityInput(input) {
+    return input.replace(/[@!^&\/\\#,+()$~%.'":*?<>{}]/g, "");
   }
 
   // get API response for a city
@@ -74,15 +120,30 @@ document.addEventListener("DOMContentLoaded", (event) => {
       })
       .catch((error) => {
         console.error("Error fetching weather data:", error);
-        alert(
-          `Sorry, we don't know the weather for this city, try going to https://www.google.com/search?q=weather+${city}`
-        );
+        alert(`Please try again`);
       });
   }
 
-  // Sanitize city input
-  function sanitizeCityInput(input) {
-    return input.replace(/[@!^&\/\\#,+()$~%.'":*?<>{}]/g, "");
+  // get API response for daily weather
+  function getForecastAPI(city) {
+    let apiKey = "0daa30c42c0776b6ft149co23bec4055";
+    let apiUrl = `https://api.shecodes.io/weather/v1/forecast?query=${city}&key=${apiKey}&unit=metric`;
+    axios
+      .get(apiUrl)
+      .then((response) => {
+        if (response.data && response.data.city) {
+          showForecast(response);
+        } else {
+          console.error("Error: Forecast not found in the response data.");
+          alert(
+            `Error: The forecast for specified city "${city}" was not found.`
+          );
+        }
+      })
+      .catch((error) => {
+        console.error("Error fetching weather data:", error);
+        alert(`Please try again`);
+      });
   }
 
   let newCity = document.querySelector("#search-form");
