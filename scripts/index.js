@@ -1,7 +1,6 @@
 document.addEventListener("DOMContentLoaded", (event) => {
   //show weather for default city
   getApi("KYIV");
-  showForecast();
 
   //updates time every second
   setInterval(() => {
@@ -44,6 +43,37 @@ document.addEventListener("DOMContentLoaded", (event) => {
         src="${response.data.condition.icon_url}"
         alt=""
       />`;
+
+    getForecastAPI(response.data.city);
+  }
+
+  //Show weather forecast
+  function showForecast(response) {
+    console.log(response.data);
+
+    let days = ["Thu", "Fri", "Sat", "Sun", "Mon"];
+    let forecastHTML = "";
+
+    days.forEach(function (day) {
+      forecastHTML =
+        forecastHTML +
+        `
+<div class="weather-forecast-day">
+  <div class="weather-forecast-date">Thu</div>
+  <div class="weather-forecast-icon">
+    <img
+      src="http://shecodes-assets.s3.amazonaws.com/api/weather/icons/clear-sky-day.png"
+      alt=""
+    />
+  </div>
+  <div class="weather-forecast-temperatures">
+    <span class="weather-forecast-temp-max">18°</span>
+    <span class="weather-forecast-temp-min">12°</span>
+  </div>
+</div>`;
+    });
+    let forecastElement = document.querySelector("#forecast");
+    forecastElement.innerHTML = forecastHTML;
   }
 
   // Search for a city
@@ -57,6 +87,11 @@ document.addEventListener("DOMContentLoaded", (event) => {
       getApi(city);
     }
     cityInput.value = "";
+  }
+
+  // Sanitize city input
+  function sanitizeCityInput(input) {
+    return input.replace(/[@!^&\/\\#,+()$~%.'":*?<>{}]/g, "");
   }
 
   // get API response for a city
@@ -82,35 +117,12 @@ document.addEventListener("DOMContentLoaded", (event) => {
       });
   }
 
-  // Sanitize city input
-  function sanitizeCityInput(input) {
-    return input.replace(/[@!^&\/\\#,+()$~%.'":*?<>{}]/g, "");
-  }
-
-  //Show weather forecast
-  function showForecast() {
-    let days = ["Thu", "Fri", "Sat", "Sun", "Mon"];
-    let forecastHTML = "";
-    days.forEach(function (day) {
-      forecastHTML =
-        forecastHTML +
-        `
-<div class="weather-forecast-day">
-  <div class="weather-forecast-date">Thu</div>
-  <div class="weather-forecast-icon">
-    <img
-      src="http://shecodes-assets.s3.amazonaws.com/api/weather/icons/clear-sky-day.png"
-      alt=""
-    />
-  </div>
-  <div class="weather-forecast-temperatures">
-    <span class="weather-forecast-temp-max">18°</span>
-    <span class="weather-forecast-temp-min">12°</span>
-  </div>
-</div>`;
-    });
-    let forecastElement = document.querySelector("#forecast");
-    forecastElement.innerHTML = forecastHTML;
+  // get API response for daily weather
+  function getForecastAPI(city) {
+    let apiKey = "0daa30c42c0776b6ft149co23bec4055";
+    let apiUrl = `https://api.shecodes.io/weather/v1/forecast?query=${city}&key=${apiKey}&unit=metric`;
+    console.log(apiUrl);
+    axios.get(apiUrl).then(showForecast);
   }
 
   let newCity = document.querySelector("#search-form");
