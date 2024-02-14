@@ -1,7 +1,9 @@
 document.addEventListener("DOMContentLoaded", (event) => {
   //show weather for default city
   getApi("KYIV");
+  showForecast();
 
+  //updates time every second
   setInterval(() => {
     let date = new Date();
     document.querySelector("#time").innerHTML = displayTime(date);
@@ -83,6 +85,32 @@ document.addEventListener("DOMContentLoaded", (event) => {
   // Sanitize city input
   function sanitizeCityInput(input) {
     return input.replace(/[@!^&\/\\#,+()$~%.'":*?<>{}]/g, "");
+  }
+
+  //Show weather forecast
+  function showForecast() {
+    let days = ["Thu", "Fri", "Sat", "Sun", "Mon"];
+    let forecastHTML = "";
+    days.forEach(function (day) {
+      forecastHTML =
+        forecastHTML +
+        `
+<div class="weather-forecast-day">
+  <div class="weather-forecast-date">Thu</div>
+  <div class="weather-forecast-icon">
+    <img
+      src="http://shecodes-assets.s3.amazonaws.com/api/weather/icons/clear-sky-day.png"
+      alt=""
+    />
+  </div>
+  <div class="weather-forecast-temperatures">
+    <span class="weather-forecast-temp-max">18°</span>
+    <span class="weather-forecast-temp-min">12°</span>
+  </div>
+</div>`;
+    });
+    let forecastElement = document.querySelector("#forecast");
+    forecastElement.innerHTML = forecastHTML;
   }
 
   let newCity = document.querySelector("#search-form");
